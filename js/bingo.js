@@ -18,6 +18,9 @@ display_image('assets/Cartones-bingo.png', 496, 198, 'Cartones de Bingo');
 document.write("<p>El bingo de 90 bolas es el que se juega en más partes del mundo. Los cartones tienen 15 números distribuidos en 3 filas diferentes. (fuente: Wikipedia.org)</p>");
 document.write("<strong>Premios: Línea:<\strong><p> Consiste en acertar antes que el resto todos los números de una línea. <\p><strong>Cartón:<\strong><p> Es el premio principal. Consiste en acertar antes que el resto todos los números del cartón.</p>");
 
+document.write('<input type="button" value="JUGAR" onclick="jugar();"></input>')
+
+function jugar(){
 // ingreso los números de los cartones. Para este juego no vala hacer línea, gana quién complete el cartón.
 // Todavía no vimos arrays, pero me adelanto un poco para hacerlo más interesante. Para el próximo ejercicio definiré funciones que hagan al código más simple y corto, además de incluir la posibilidad de hacer línea.
 
@@ -122,6 +125,6 @@ if(carton4.length==0){
         document.write("<h3>Ganó el cartón 4 "+nombre+"!!!");
     };
 }
-
+}
 
 
