@@ -15,8 +15,10 @@ function display_image(src, width, height, alt) {
 display_image('assets/Cartones-bingo.png', 496, 198, 'Cartones de Bingo');
 
 //Instrucciones
-document.write("<p>El bingo de 90 bolas es el que se juega en más partes del mundo. Los cartones tienen 15 números distribuidos en 3 filas diferentes. (fuente: Wikipedia.org)</p>");
-document.write("<strong>Premios: Línea:<\strong><p> Consiste en acertar antes que el resto todos los números de una línea. <\p><strong>Cartón:<\strong><p> Es el premio principal. Consiste en acertar antes que el resto todos los números del cartón.</p>");
+document.write("<p>El bingo de 90 bolas es el más jugado en todo el mundo. Los cartones tienen 15 números distribuidos en 3 filas diferentes.</p>");
+document.write("<h3>Premios: <\h3>"+"<h4>Línea:<\h4>")
+document.write("<p> Consiste en acertar antes que el resto todos los números de una línea. <\p>")
+document.write("<h4>Cartón:<\h4>"+"<p> Es el premio principal. Consiste en acertar antes que el resto todos los números del cartón.</p>");
 
 document.write('<input type="button" value="JUGAR" onclick="jugar();"></input>')
 
