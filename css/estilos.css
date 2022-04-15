@@ -1,7 +1,16 @@
+.section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .titulo{
     color: red;
-    margin-left: auto;
-    margin-right:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#img1{
+    width: 450px;
 }
 .rojo{
     color: red;
@@ -26,4 +35,8 @@
     margin-left: auto;
     margin-right:auto;
     font-size: 1.5rem;
+}
+.gridarea{
+    display: grid;
+    
 }
