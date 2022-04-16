@@ -10,28 +10,41 @@
 <body>
     <header class="encabezado">
         <h1 class="titulo">Juego CoderBingo</h1>
+        <h3>Escoje tu cartón, presiona Jugar y ten mucha suerte!</h3>
     </header>
-<div class="section">
-    <section class="section1">
-        <h2>Escoje tu cartón, presiona Jugar y ten mucha suerte!</h2>
-        <img id="img1" src="assets/Cartones-bingo.png" alt="Cartones de bingo para elegir">
-    </section>
-    <section class="section2">
-        <p>El bingo de 90 bolas es el más jugado en todo el mundo. Los cartones tienen 15 números distribuidos en 3 filas diferentes.</p>
-        <h3>Premios: </h3>
-        <h4>Línea:</h4>
-        <p> Consiste en acertar antes que el resto todos los números de una línea. </p>
-        <h4>Cartón:</h4>
-        <p> Es el premio principal. Consiste en acertar antes que el resto todos los números del cartón.</p>
-    </section>
-</div>
-<div class="titulo">
-    <input id="btJugar" class="titulo" type="button" value="JUGAR">
-</div>
-<h3 class="titulo">Desarrollo del Juego</h3>
-<div id="desarrollo">
+    <div class="containerCartones">
+        <div class="imgCarton1"></div>
+        <div class="carton1" id="carton1"><h4>Cartón 1</h4></div>
+        <div class="imgCarton2"></div>
+        <div class="carton2" id="carton2"><h4>Cartón 2</h4></div>
+        <div class="imgCarton3"></div>
+        <div class="carton3" id="carton3"><h4>Cartón 3</h4></div>
+        <div class="imgCarton4"></div>
+        <div class="carton4" id="carton4"><h4>Cartón 4</h4></div>
+    </div>
 
-</div>
+    <div class="titulo">
+        <input id="btJugar" class="titulo" type="button" value="JUGAR">
+    </div>
+    <h3 class="titulo">Desarrollo del Juego</h3>
+    <div id="bolillero"></div>
+    
+    <footer class="encabezado footer">
+        <div class="footer1">
+            <h3>Sobre el juego:</h3>
+            <p>El bingo de 90 bolas es el más jugado en todo el mundo. Los cartones tienen 15 números distribuidos en 3 filas diferentes.</p>
+            <br>
+            <p>Estar versión digital fue creada por Héctor H. Vázquez Cuestas como trabajo práctico del curso de JavaScript de CoderHouse  </p>
+        </div>
+        <div class="footer2">
+            <h3>Premios: </h3>
+            <h4>Línea:</h4>
+            <p> Consiste en acertar antes que el resto todos los números de una línea. </p>
+            <h4>Cartón:</h4>
+            <p> Es el premio principal. Consiste en acertar antes que el resto todos los números del cartón.</p>
+        </div>
+        
+    </footer>
 
 <script src="js/bingo.js"></script>
 </body>

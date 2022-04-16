@@ -1,22 +1,131 @@
-.section{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+*, *:before, *:after{
+    box-sizing:border-box;
+    margin: 5px;;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+.encabezado{
+background-color: rgb(88, 70, 105);
 }
 .titulo{
-    color: red;
+    color: rgb(233, 95, 95);
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#img1{
-    width: 450px;
+h3{
+    color: rgb(164, 140, 140);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.containerCartones{
+grid-area: containerCartones;
+display: grid;
+grid-template-areas: 
+"imgCarton1"
+"carton1"
+"imgCarton2"
+"carton2"
+"imgCarton3"
+"carton3"
+"imgCarton4"
+"carton4";
+}
+@media (min-width:540px){
+    .containerCartones{
+        grid-template:
+        "imgCarton1 imgCarton2"
+        "carton1 carton2"
+        "imgCarton3 imgCarton4"
+        "carton3 carton4"/
+        50% 50%;
+    }
+    .footer{
+        grid-template:
+        "footer1" "footer2"/
+        50% 50%;
+    }
+
+}
+@media (min-width: 900px){
+    .containerCartones{
+        grid-template:
+        "imgCarton1 imgCarton2 imgCarton3 imgCarton4"
+        "carton1 carton2 carton3 carton4"/
+        25% 25% 25% 25%;
+    }
+}
+.imgCarton1{
+    grid-area: imgCarton1;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 10rem;
+    background-image: url('../assets/Carton1.png');
+}
+.imgCarton2{
+    grid-area: imgCarton2;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 10rem;
+    background-image: url('../assets/Carton2.png');
+}
+.imgCarton3{
+    grid-area: imgCarton3;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 10rem;
+    background-image: url('../assets/Carton3.png');
+}
+.imgCarton4{
+    grid-area: imgCarton4;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 10rem;
+    background-image: url('../assets/Carton4.png');
+}
+.carton1{
+    grid-area: carton1;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.carton2{
+    grid-area: carton2;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.carton3{
+    grid-area: carton3;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.carton4{
+    grid-area: carton4;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer{
+    grid-area: containerCartones;
+    display: grid;
+    grid-template-areas: 
+    "footer1"
+    "footer2"
+}
+
 .rojo{
     color: red;
     margin-left: auto;
     margin-right:auto;
-    font-size: 1.5rem;
 }
 .amarillo{
     color: yellow;
@@ -35,8 +144,4 @@
     margin-left: auto;
     margin-right:auto;
     font-size: 1.5rem;
-}
-.gridarea{
-    display: grid;
-    
 }
