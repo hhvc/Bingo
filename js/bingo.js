@@ -1,8 +1,6 @@
 // Juego de Bingo - Trabajo práctico curso JS en Coderhouse - Alumno, Héctor Horacio Vázquez Cuestas
 let bolillero=[];
-
 let jugador1="vos, el burro", jugador2="C-3PO", jugador3="BB-8", jugador4="R2-D2";
-
 let ganadorLinea="";
 let ganadorBingo="";
 
