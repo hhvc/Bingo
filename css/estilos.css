@@ -20,6 +20,20 @@ h3{
     justify-content: center;
     align-items: center;
 }
+.bolillero1{
+    color: antiquewhite;
+    grid-area: bolillero1;
+    display: grid;
+    grid-template-areas: 
+    "bolillasAdentro bolillasAfuera";
+}
+.bolillasAdentro{
+    grid-area: bolillasAdentro;
+}
+.bolillasAfuera{
+    grid-area: bolillasAfuera;
+}
+
 .containerCartones{
 grid-area: containerCartones;
 display: grid;
@@ -127,21 +141,7 @@ grid-template-areas:
     margin-left: auto;
     margin-right:auto;
 }
-.amarillo{
-    color: yellow;
-    margin-left: auto;
-    margin-right:auto;
-    font-size: 1.5rem;
-}
-.verde{
-    color: green;
-    margin-left: auto;
-    margin-right:auto;
-    font-size: 1.5rem;
-}
-.azul{
-    color: blue;
-    margin-left: auto;
-    margin-right:auto;
-    font-size: 1.5rem;
+.jugadores{
+    color: rgb(88, 70, 105);
+    text-transform: capitalize;
 }
