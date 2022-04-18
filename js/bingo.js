@@ -1,6 +1,5 @@
 // Juego de Bingo - Trabajo práctico curso JS en Coderhouse - Alumno, Héctor Horacio Vázquez Cuestas
-let salir = "n"
-let bolillero=[];
+const bolillero=[];
 
 let jugador1="vos, el burro", jugador2="C-3PO", jugador3="BB-8", jugador4="R2-D2";
 
@@ -114,7 +113,7 @@ function inicioJuego(){
 
     if (jugador1=="vos, el burro"){
         imageJ1.src= '../assets/1burro.jpeg';
-    } else {imageJ1.src= '../assets/1chancho.jpeg'};
+    } else {imageJ1.src="../assets/1chancho.jpeg"};
     if (jugador2=="C-3PO"){
         imageJ2.src= '../assets/C-3PO.jpeg';
     } else {imageJ2.src= '../assets/1ganso.png'};
@@ -132,22 +131,6 @@ function inicioJuego(){
 
     alert ("Jugadores en la mesa. Presiona Enter para iniciar juego");
     tirarBolillas();
-
-//     cartonElegido = parseInt(prompt("ingresá tu número de cartón (entre 1 y 4)"));
-// // Según el número elegido, el jugador accede a un cartón o pierde
-//     let confirmacionJuego = '<p class= "rojo">'+nombre+', estás jugando con el cartón <strong>'+cartonElegido+'!!!</strong></p>';
-//     if (!Number.isInteger(cartonElegido)){
-//         alert ("Un número papá, tenías que poner un número!!! Perdiste por sonso. Andate a jugar al TaTeTi...");
-//     } else {
-//         if (cartonElegido < 1 || cartonElegido >4) {
-//         alert ("Perdiste por gil. No era tan dificil, solo tenías que poner un número entre 1 y 4");
-//         } else {
-//             alert ("Buena opción. Estás jugando con el cartón "+cartonElegido);
-//             magiaBolillero.insertAdjacentHTML('beforeend',confirmacionJuego);
-//             setCarton(cartonElegido);
-//             tirarBolillas();
-//         };
-//     };
 };
 
 function tirarBolillas(){
@@ -159,10 +142,8 @@ function tirarBolillas(){
     const magiabolillasAfuera = document.getElementById("bolillasAfuera");
     magiabolillasAdentro.insertAdjacentHTML('beforeend','<p id="bolillero2">'+bolillero+'</p>');
 
-    while (bolillero.length!=0 && carton1Concat.length!=0 && carton2Concat.length!=0 && carton3Concat.length!=0 && carton4Concat.length!=0 && salir!="s"){
+    while (bolillero.length!=0 && carton1Concat.length!=0 && carton2Concat.length!=0 && carton3Concat.length!=0 && carton4Concat.length!=0){
         let aleatorio = Math.round(Math.random()*90);
-
- // salir = prompt("Bolilla: "+aleatorio+'  ¿Para salir presiona "s", sino continuamos?');
 
         let pruebaBolillero = bolillero.indexOf(aleatorio);
 
@@ -287,51 +268,19 @@ function tirarBolillas(){
         if(carton1Concat.length==0){
         alert("Tenemos un ganador con el cartón 1!");
         setGanadorBingo(jugador1);
-            // if(carton == 1){
-            //     alert("Felicitaciones "+nombre);
-            //     magiaBolillero.insertAdjacentHTML('beforeend',"<h3>Felicitaciones "+nombre+"!!!</h3>");
-            //     magiaCarton1.insertAdjacentHTML('afterbegin','<h3 class="rojo">¡¡¡Bingo!!!</h3>')
-            // }   else{
-            //         alert("Y vos, "+nombre+", perdiste!!! ");
-            //         magiaCarton1.insertAdjacentHTML('afterbegin',"<h3>Perdiste "+nombre+" Ganó el cartón 1!!!</h3>");
-            //     };
         };
 
         if(carton2Concat.length==0){
             alert("Tenemos un ganador con el cartón 2!");
             setGanadorBingo(jugador2);
-            // if(carton == 2){
-            //     alert("Felicitaciones "+nombre);
-            //     magiaBolillero.insertAdjacentHTML('beforeend',"<h3>Felicitaciones "+nombre+"!!!");
-            //     magiaCarton2.insertAdjacentHTML('afterbegin',"<h3>¡¡¡Bingo!!!</H3>")
-            // } else{
-            //     alert("Y vos, "+nombre+", perdiste!!! ");
-            //     magiaCarton2.insertAdjacentHTML('afterbegin',"<h3>Perdiste "+nombre+". Ganó el cartón 2!!!</h3>");
-            // };
         }
         if(carton3Concat.length==0){
             alert("Tenemos un ganador con el cartón 3!");
             setGanadorBingo(jugador3);
-            // if(carton == 3){
-            //     alert("Felicitaciones "+nombre);
-            //     magiaBolillero.insertAdjacentHTML('beforeend',"<h3>Felicitaciones "+nombre+"!!!");
-            //     magiaCarton3.insertAdjacentHTML('afterbegin','<h3 class="rojo">Bingo!!!</H3>');
-            // }   else{
-            //         alert("Y vos, "+nombre+", perdiste!!! ");
-            //         magiaCarton3.insertAdjacentHTML('afterbegin',"<h3>Perdiste "+nombre+". Ganó el cartón 3!!!</h3>");
-            //     };
         };
         if(carton4Concat.length==0){
             alert("Tenemos un ganador con el cartón 4!");
             setGanadorBingo(jugador4);
-            // if(carton == 4){
-            //     alert("Felicitaciones "+nombre);
-            //     magiaBolillero.insertAdjacentHTML('beforeend',"<h3>Felicitaciones "+nombre+"!!!");
-            //     magiaCarton4.insertAdjacentHTML('afterbegin',"<h3>¡¡¡Bingo!!!</H3>");
-            // }   else{
-            //         alert("Y vos, "+nombre+", perdiste!!! ");
-            //         magiaCarton4.insertAdjacentHTML('afterbegin',"<h3>Perdiste "+nombre+". Ganó el cartón 4!!!</h3>");
-            //     };
         };
     };
 };
