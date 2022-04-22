@@ -1,20 +1,61 @@
 // Juego de Bingo - Trabajo práctico curso JS en Coderhouse - Alumno, Héctor Horacio Vázquez Cuestas
 let bolillero=[];
-let jugador1="vos, el burro", jugador2="C-3PO", jugador3="BB-8", jugador4="R2-D2";
+
+const imageJ1 = document.createElement('img');
+const imageJ2 = document.createElement('img');
+const imageJ3 = document.createElement('img');
+const imageJ4 = document.createElement('img');
+
+let magiajugador1 = document.getElementById("jugador1");
+let magiajugador2 = document.getElementById("jugador2");
+let magiajugador3 = document.getElementById("jugador3");
+let magiajugador4 = document.getElementById("jugador4");
+
+let jugador1={
+    nombre:"vos, el burro",
+    avatar: imageJ1,
+};
+
+let jugador2={
+    nombre:"C-3PO",
+    avatar:imageJ2,
+};
+    
+let jugador3={
+    nombre:"BB-8",
+    avatar: imageJ3,
+};
+
+let jugador4={
+    nombre:"R2-D2",
+    avatar:imageJ4,
+};
+
+
 let ganadorLinea="";
 let ganadorBingo="";
+let juego="off";
+
+function preInicioJuego(){
+    if(juego=="on"){
+        juego="off"
+        location.reload();
+    } else {
+        juego="on";
+        inicioJuego();
+    };
+};
 
 function setNombre (nombreIngresado, nroJugador){
     if (nombreIngresado!="" && nombreIngresado!="robot" && nombreIngresado!=" " && nombreIngresado!=null){
         switch(nroJugador){
-            case 1: jugador1=nombreIngresado;
+            case 1: jugador1.nombre=nombreIngresado;
             break;
-            case 2: jugador2=nombreIngresado;
+            case 2: jugador2.nombre=nombreIngresado;
             break;
-            case 3: jugador3=nombreIngresado;
+            case 3: jugador3.nombre=nombreIngresado;
             break;
-            case 4: jugador4=nombreIngresado;
-
+            case 4: jugador4.nombre=nombreIngresado;
         }
     };
 };
@@ -22,41 +63,56 @@ function setNombre (nombreIngresado, nroJugador){
 function setGanadorLinea(ganador){
     ganadorLinea=ganador;
     switch(ganador){
-        case jugador1: magiaCarton1.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
+        case jugador1:
+            magiajugador1.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
+            magiaCarton1.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
         break
-        case jugador2: magiaCarton2.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
+        case jugador2:
+            magiajugador2.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
+            magiaCarton2.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
         break
-        case jugador3: magiaCarton3.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
+        case jugador3:
+            magiajugador3.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
+            magiaCarton3.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
         break
-        case jugador4: magiaCarton4.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
+        case jugador4:
+            magiajugador4.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
+            magiaCarton4.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡Línea!!!</h3>');
     }
     const footer = document.getElementById("footer");
-    footer.insertAdjacentHTML('beforebegin', '<h3 class="rojo">¡¡¡Línea!!! del jugador '+ganador+'</h3>');
+    footer.insertAdjacentHTML('beforebegin', '<h3 class="rojo">¡¡¡Línea!!! del jugador '+ganador.nombre+'</h3>');
 
 }
 function setGanadorBingo(ganador){
     ganadorBingo=ganador;
     switch(ganador){
         
-        case jugador1: const magiajugador1 = document.getElementById("jugador1");
+        case jugador1:
             magiajugador1.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡BINGO!!!</h3>');
             magiaCarton1.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡BINGO!!!</h3>');
         break
-        case jugador2: const magiajugador2 = document.getElementById("jugador2");
+        case jugador2:
             magiajugador2.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡BINGO!!!</h3>');
             magiaCarton2.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡BINGO!!!</h3>');
         break
-        case jugador3: const magiajugador3 = document.getElementById("jugador3");
+        case jugador3:
             magiajugador3.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡BINGO!!!</h3>');
             magiaCarton3.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡BINGO!!!</h3>');
         break
-        case jugador4: const magiajugador4 = document.getElementById("jugador4");
+        case jugador4:
             magiajugador4.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡BINGO!!!</h3>');
             magiaCarton4.insertAdjacentHTML('beforeend', '<h3 class="rojo">¡¡¡BINGO!!!</h3>');
     }
     const footer = document.getElementById("footer");
-    footer.insertAdjacentHTML('beforebegin', '<h3 class="rojo">¡¡¡BINGO!!! Ganó el jugador '+ganador+'</h3>');
+    footer.insertAdjacentHTML('beforebegin', '<h3 class="rojo">¡¡¡BINGO!!! Ganó el jugador '+ganador.nombre+'</h3>');
 }
+
+function setMagiaJugadores(){
+        magiajugador1 = document.getElementById("jugador1");
+        magiajugador2 = document.getElementById("jugador2");
+        magiajugador3 = document.getElementById("jugador3");
+        magiajugador4 = document.getElementById("jugador4");
+};
 
 let carton1=[
     c1Linea1=[8,14,41,62,85],
@@ -79,8 +135,14 @@ let carton4=[
     c4Linea3=[25,46,58,77,90]
     ];
 
+function sonido(){
+    const sonido=new Audio('../assets/sonido.mp3');
+    sonido.play();
+};
+
+
 const jugar = document.getElementById("btJugar");
-jugar.addEventListener("click", inicioJuego);
+jugar.addEventListener("click", preInicioJuego);
 
 const magiaBolillero = document.getElementById("bolillasAdentro");
 const magiaCarton1 = document.getElementById("carton1");
@@ -93,32 +155,28 @@ function resetBolillero(){
 };
 
 function inicioJuego(){
+    sonido();
     resetBolillero();
     // ingreso nombres de jugadores
     for (let i=1; i<5; i++){
         nombreIngresado = prompt('Ingresa el nombre del jugador o "Cancelar" para incorporar robot');
         setNombre (nombreIngresado, i);
     }
-    magiaCarton1.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador1">'+jugador1+'</h3>');
-    magiaCarton2.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador2">'+jugador2+'</h3>');
-    magiaCarton3.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador3">'+jugador3+'</h3>');
-    magiaCarton4.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador4">'+jugador4+'</h3>');
+    magiaCarton1.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador1">'+jugador1.nombre+'</h3>');
+    magiaCarton2.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador2">'+jugador2.nombre+'</h3>');
+    magiaCarton3.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador3">'+jugador3.nombre+'</h3>');
+    magiaCarton4.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador4">'+jugador4.nombre+'</h3>');
 
-    const imageJ1 = document.createElement('img');
-    const imageJ2 = document.createElement('img');
-    const imageJ3 = document.createElement('img');
-    const imageJ4 = document.createElement('img');
-
-    if (jugador1=="vos, el burro"){
+    if (jugador1.nombre=="vos, el burro"){
         imageJ1.src= '../assets/1burro.jpeg';
     } else {imageJ1.src="../assets/1chancho.jpeg"};
-    if (jugador2=="C-3PO"){
+    if (jugador2.nombre=="C-3PO"){
         imageJ2.src= '../assets/C-3PO.jpeg';
     } else {imageJ2.src= '../assets/1ganso.png'};
-    if (jugador3=="BB-8"){
+    if (jugador3.nombre=="BB-8"){
         imageJ3.src= '../assets/BB-8.jpeg';
     } else {imageJ3.src= '../assets/1perro.png'};
-    if (jugador4=="R2-D2"){
+    if (jugador4.nombre=="R2-D2"){
         imageJ4.src= '../assets/R2-D2.jpeg';
     } else {imageJ4.src= '../assets/1burro.jpeg'};
 
@@ -132,6 +190,7 @@ function inicioJuego(){
 };
 
 function tirarBolillas(){
+    setMagiaJugadores();
     let carton1Concat = c1Linea1.concat(c1Linea2, c1Linea3);
     let carton2Concat = c2Linea1.concat(c2Linea2, c2Linea3);
     let carton3Concat = c3Linea1.concat(c3Linea2, c3Linea3);
@@ -279,10 +338,10 @@ function tirarBolillas(){
         if(carton4Concat.length==0){
             alert("Tenemos un ganador con el cartón 4!");
             setGanadorBingo(jugador4);
+
         };
     };
 };
-
 
 
 
