@@ -1,4 +1,6 @@
 // Juego de Bingo - Trabajo práctico curso JS en Coderhouse - Alumno, Héctor Horacio Vázquez Cuestas
+
+//El bolillero tiene números corridos del 1 al 90. Lo defino como array para poder vaciarlo a medida que salen los números.
 let bolillero=[];
 
 const imageJ1 = document.createElement('img');
@@ -6,36 +8,65 @@ const imageJ2 = document.createElement('img');
 const imageJ3 = document.createElement('img');
 const imageJ4 = document.createElement('img');
 
+//A las variables que defino con nombre *magia* las uso para interactuar con el DOM 
 let magiajugador1 = document.getElementById("jugador1");
 let magiajugador2 = document.getElementById("jugador2");
 let magiajugador3 = document.getElementById("jugador3");
 let magiajugador4 = document.getElementById("jugador4");
 
+// Defino a los jugadores como objetos para hacer el código más simple y funcional.
+// Agrego parámetros de más porque me servirán para otros juegos. 
 let jugador1={
     nombre:"vos, el burro",
+    sexo: undefined,
+    edad: undefined,
+    fuerza: undefined,
+    resistencia: undefined,
+    altura:undefined,
+    peso: undefined,
     avatar: imageJ1,
 };
 
 let jugador2={
     nombre:"C-3PO",
+    sexo: undefined,
+    edad: undefined,
+    fuerza: undefined,
+    resistencia: undefined,
+    altura:undefined,
+    peso: undefined,
     avatar:imageJ2,
 };
     
 let jugador3={
     nombre:"BB-8",
+    sexo: undefined,
+    edad: undefined,
+    fuerza: undefined,
+    resistencia: undefined,
+    altura:undefined,
+    peso: undefined,
     avatar: imageJ3,
 };
 
 let jugador4={
     nombre:"R2-D2",
+    sexo: undefined,
+    edad: undefined,
+    fuerza: undefined,
+    resistencia: undefined,
+    altura:undefined,
+    peso: undefined,
     avatar:imageJ4,
 };
 
 
+// defino variables que contendrán los datos de los ganadores para poder asignar los mismos desde funciones
 let ganadorLinea="";
 let ganadorBingo="";
 let juego="off";
 
+// Esta función es solo para reiniciar la página luego de cada juego y así minimizar el riesgo de error al manipular el DOM con JS
 function preInicioJuego(){
     if(juego=="on"){
         juego="off"
@@ -46,20 +77,28 @@ function preInicioJuego(){
     };
 };
 
+// Esta función asigna los nombres de jugadores a las variables correspondientes.
+//Dentro del index.html agrego la funcionalidad onclick a los botones de agregar jugador para que activen la función setNombre enviándole como parámetro el nombre ingresado y el número de jugador.
 function setNombre (nombreIngresado, nroJugador){
     if (nombreIngresado!="" && nombreIngresado!="robot" && nombreIngresado!=" " && nombreIngresado!=null){
         switch(nroJugador){
             case 1: jugador1.nombre=nombreIngresado;
+            magiaCarton1.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador1">'+jugador1.nombre+'</h3>');
             break;
             case 2: jugador2.nombre=nombreIngresado;
+            magiaCarton2.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador2">'+jugador2.nombre+'</h3>');
             break;
             case 3: jugador3.nombre=nombreIngresado;
+            magiaCarton3.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador3">'+jugador3.nombre+'</h3>');
             break;
             case 4: jugador4.nombre=nombreIngresado;
+            magiaCarton4.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador4">'+jugador4.nombre+'</h3>');
         }
     };
 };
 
+// Las siguientes funciones reciben como dato cuá es el jugador que ha ganado y envían al DOM la información en la ubicación correspondiente a cada ganador.
+// Debería poder mejorarlas minimizando las repeticiones de líneas similares, pero las prioridades actuales son que todo funcione e ir mejorando la funcionalidad a nivel usuario.
 function setGanadorLinea(ganador){
     ganadorLinea=ganador;
     switch(ganador){
@@ -107,6 +146,7 @@ function setGanadorBingo(ganador){
     footer.insertAdjacentHTML('beforebegin', '<h3 class="rojo">¡¡¡BINGO!!! Ganó el jugador '+ganador.nombre+'</h3>');
 }
 
+// Con esta función capturo la posición de cada jugador dentro del DOM
 function setMagiaJugadores(){
         magiajugador1 = document.getElementById("jugador1");
         magiajugador2 = document.getElementById("jugador2");
@@ -114,6 +154,8 @@ function setMagiaJugadores(){
         magiajugador4 = document.getElementById("jugador4");
 };
 
+// Defino los cartones como arrays y no como objetos para poder aprovechar las funciones nativas de arrays.
+// Los cartones podrían crearse en forma aleatoria y el usuario podría elegir la cantidad de jugadores en cada mesa. Esa mejora por ahora no es prioritaria.
 let carton1=[
     c1Linea1=[8,14,41,62,85],
     c1Linea2=[26,30,57,74,87],
@@ -135,21 +177,24 @@ let carton4=[
     c4Linea3=[25,46,58,77,90]
     ];
 
+// Función que agrega un sonido al terminal la partida. La agregué para probar las funciones nativas de JS para multimedia, pero seguramente quite esta función o en todo caso ponga un sonido opcional a nivel usuario al iniciar el juego.
 function sonido(){
     const sonido=new Audio('../assets/sonido.mp3');
     sonido.play();
 };
 
-
+// Localizo al botón jugar del DOM y escucho evento "click" para correr función "preInicioJuego" que reinicia la página o inicia juego según corresponda.
 const jugar = document.getElementById("btJugar");
 jugar.addEventListener("click", preInicioJuego);
 
+//Localizo distintos elementos del DOM para poder interactuar con los mismos.
 const magiaBolillero = document.getElementById("bolillasAdentro");
 const magiaCarton1 = document.getElementById("carton1");
 const magiaCarton2 = document.getElementById("carton2");
 const magiaCarton3 = document.getElementById("carton3");
 const magiaCarton4 = document.getElementById("carton4");
 
+// Reseteo el bolillero agregando todas las bolillas al mismo. A medida que salen los números, el bolillero se va vaciando.
 function resetBolillero(){
     bolillero=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90];
 };
@@ -157,15 +202,6 @@ function resetBolillero(){
 function inicioJuego(){
     sonido();
     resetBolillero();
-    // ingreso nombres de jugadores
-    for (let i=1; i<5; i++){
-        nombreIngresado = prompt('Ingresa el nombre del jugador o "Cancelar" para incorporar robot');
-        setNombre (nombreIngresado, i);
-    }
-    magiaCarton1.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador1">'+jugador1.nombre+'</h3>');
-    magiaCarton2.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador2">'+jugador2.nombre+'</h3>');
-    magiaCarton3.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador3">'+jugador3.nombre+'</h3>');
-    magiaCarton4.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador4">'+jugador4.nombre+'</h3>');
 
     if (jugador1.nombre=="vos, el burro"){
         imageJ1.src= '../assets/1burro.jpeg';
