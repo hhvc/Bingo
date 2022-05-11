@@ -1,0 +1,46 @@
+.pista {
+  border: 1px solid blue;
+  padding: 10px;
+  margin-bottom: 2em;
+  background-color: #fff;
+}
+
+.calle {
+  border-bottom: 1px solid orange;
+  padding: 3px;
+}
+
+.coche {
+  margin-left: 0%;
+  margin-top: 0%;
+}
+
+#reiniciar {
+  display: none;
+}
+h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #FA761E;
+    margin: 15px;
+    font-family:"courier new",serif;
+}
+h2 {
+    
+    margin: 0px 0px 7px 20px;
+    font-family:"courier new",serif;
+}
+p {
+    font-size: 1em;
+    margin: 0px 0px 15px 20px;
+}
+.boton1 {
+    font-size: 1.2em;
+    padding: 10px;
+    background-color: #ebf6e0;
+}
+.boton2 {
+    font-size: 1.2em;
+    padding: 10px;
+    background-color: orange;
+}

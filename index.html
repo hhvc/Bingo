@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon.ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon.ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon.ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon.ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon.ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon.ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon.ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon.ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="assets/favicon.ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon.ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.ico/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="css/estilos.css">
     <title>CoderBingo</title>
 </head>
@@ -19,24 +33,28 @@
     <div class="containerCartones">
         <div class="imgCarton1"></div>
         <div class="carton1" id="carton1">
+            <h3 class="jugadores" id="jugador1">Jugador</h3>
             <h4>Cartón 1</h4>
             <input class="formulario" type="text" name="nombre" id="nombreJugador1" placeholder="Jugador 1">
             <button onclick="setNombre(document.getElementById('nombreJugador1').value, 1)" id="agregarJugador1">Agregar Jugador</button>
         </div>
         <div class="imgCarton2"></div>
         <div class="carton2" id="carton2">
+            <h3 class="jugadores" id="jugador2">Jugador</h3>
             <h4>Cartón 2</h4>
             <input class="formulario" type="text" name="nombre" id="nombreJugador2" placeholder="C-3PO">
             <button onclick="setNombre(document.getElementById('nombreJugador2').value, 2)" id="agregarJugador2">Agregar Jugador</button>
         </div>
         <div class="imgCarton3"></div>
         <div class="carton3" id="carton3">
+            <h3 class="jugadores" id="jugador3">Jugador</h3>
             <h4>Cartón 3</h4>
             <input class="formulario" type="text" name="nombre" id="nombreJugador3" placeholder="BB-8">
             <button onclick="setNombre(document.getElementById('nombreJugador3').value, 3)" id="agregarJugador3">Agregar Jugador</button>
         </div>
         <div class="imgCarton4"></div>
         <div class="carton4" id="carton4">
+            <h3 class="jugadores" id="jugador4">Jugador</h3>
             <h4>Cartón 4</h4>
             <input class="formulario" type="text" name="nombre" id="nombreJugador4" placeholder="R2-D2">
             <button onclick="setNombre(document.getElementById('nombreJugador4').value, 4)" id="agregarJugador4">Agregar Jugador</button>
@@ -46,7 +64,7 @@
     <div class="titulo">
         <input onclick="this.value='RESET'" id="btJugar" class="titulo" type="button" value="JUGAR">
     </div>
-    
+
     <footer class="encabezado footer" id="footer">
         <div class="footer1">
             <h3>Sobre el juego:</h3>

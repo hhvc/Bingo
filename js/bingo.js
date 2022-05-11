@@ -1,18 +1,21 @@
-// Juego de Bingo - Trabajo práctico curso JS en Coderhouse - Alumno, Héctor Horacio Vázquez Cuestas
+// ***************************************************************
+// ************************ JUEGO DE BINGO ***********************
+// *********** Trabajo práctico curso JS en Coderhouse ***********
+// ************ Alumno, Héctor Horacio Vázquez Cuestas ***********
+// ***************************************************************
 
 //El bolillero tiene números corridos del 1 al 90. Lo defino como array para poder vaciarlo a medida que salen los números.
 let bolillero=[];
+
+// defino variables que contendrán los datos de los ganadores para poder asignar los mismos desde funciones
+let ganadorLinea="";
+let ganadorBingo="";
+let juego="off";
 
 const imageJ1 = document.createElement('img');
 const imageJ2 = document.createElement('img');
 const imageJ3 = document.createElement('img');
 const imageJ4 = document.createElement('img');
-
-//A las variables que defino con nombre *magia* las uso para interactuar con el DOM 
-let magiajugador1 = document.getElementById("jugador1");
-let magiajugador2 = document.getElementById("jugador2");
-let magiajugador3 = document.getElementById("jugador3");
-let magiajugador4 = document.getElementById("jugador4");
 
 // Defino a los jugadores como objetos para hacer el código más simple y funcional.
 // Agrego parámetros de más porque me servirán para otros juegos. 
@@ -60,39 +63,72 @@ let jugador4={
     avatar:imageJ4,
 };
 
+recuperar_localsotorage();
 
-// defino variables que contendrán los datos de los ganadores para poder asignar los mismos desde funciones
-let ganadorLinea="";
-let ganadorBingo="";
-let juego="off";
+//función para guardar nombre de jugadores en el localstorage
+function guardar_localstorage(jugador, nombre){
+    localStorage.setItem(jugador, nombre);
+}
+//función para recuperar nombres de usuario desde el localstorage
+function recuperar_localsotorage(){
+    if(localStorage.getItem("jugador1")){
+        jugador1.nombre=localStorage.getItem("jugador1");
+    }
+    if(localStorage.getItem("jugador2")){
+        jugador2.nombre=localStorage.getItem("jugador2");
+    }
+    if(localStorage.getItem("jugador3")){
+        jugador3.nombre=localStorage.getItem("jugador3");
+    }
+    if(localStorage.getItem("jugador4")){
+        jugador4.nombre=localStorage.getItem("jugador4");
+    }
+}
+// capturo la ubicación del nombre de los jugadores en el DOM mediante el ID
+let magiajugador1 = document.getElementById("jugador1");
+let magiajugador2 = document.getElementById("jugador2");
+let magiajugador3 = document.getElementById("jugador3");
+let magiajugador4 = document.getElementById("jugador4");
 
-// Esta función es solo para reiniciar la página luego de cada juego y así minimizar el riesgo de error al manipular el DOM con JS
-function preInicioJuego(){
-    if(juego=="on"){
-        juego="off"
-        location.reload();
-    } else {
-        juego="on";
-        inicioJuego();
-    };
-};
+// actualizo nombre de jugadores en la mesa
+magiajugador1.innerHTML=jugador1.nombre;
+magiajugador2.innerHTML=jugador2.nombre;
+magiajugador3.innerHTML=jugador3.nombre;
+magiajugador4.innerHTML=jugador4.nombre;
 
-// Esta función asigna los nombres de jugadores a las variables correspondientes.
+//A las variables que defino con nombre *magia* las uso para interactuar con el DOM 
+//Localizo distintos elementos del DOM para poder interactuar con los mismos.
+const magiaBolillero = document.getElementById("bolillasAdentro");
+const magiaCarton1 = document.getElementById("carton1");
+const magiaCarton2 = document.getElementById("carton2");
+const magiaCarton3 = document.getElementById("carton3");
+const magiaCarton4 = document.getElementById("carton4");
+
+// Esta función me permite devolver audio con el texto que ingrese. Aquí la uso para saludar a los jugadores que ingresan al juego y luego cuando el juego inicia.
+const hablar =(texto)=>speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
+
+// Esta función asigna los nombres de jugadores a las variables correspondientes y en el localstorage.
 //Dentro del index.html agrego la funcionalidad onclick a los botones de agregar jugador para que activen la función setNombre enviándole como parámetro el nombre ingresado y el número de jugador.
 function setNombre (nombreIngresado, nroJugador){
+    guardar_localstorage("jugador"+nroJugador, nombreIngresado);
+// Agrego saludo fonético
+    let saludo= "hola "+nombreIngresado+", bienvenido al juego";
+    hablar(saludo);
+
+// asigno nuevo nombre de jugaror
     if (nombreIngresado!="" && nombreIngresado!="robot" && nombreIngresado!=" " && nombreIngresado!=null){
         switch(nroJugador){
             case 1: jugador1.nombre=nombreIngresado;
-            magiaCarton1.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador1">'+jugador1.nombre+'</h3>');
+            magiajugador1.innerHTML=jugador1.nombre;
             break;
             case 2: jugador2.nombre=nombreIngresado;
-            magiaCarton2.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador2">'+jugador2.nombre+'</h3>');
+            magiajugador2.innerHTML=jugador2.nombre;
             break;
             case 3: jugador3.nombre=nombreIngresado;
-            magiaCarton3.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador3">'+jugador3.nombre+'</h3>');
+            magiajugador3.innerHTML=jugador3.nombre;
             break;
             case 4: jugador4.nombre=nombreIngresado;
-            magiaCarton4.insertAdjacentHTML('afterbegin','<h3 class="jugadores" id="jugador4">'+jugador4.nombre+'</h3>');
+            magiajugador4.innerHTML=jugador4.nombre;
         }
     };
 };
@@ -146,14 +182,6 @@ function setGanadorBingo(ganador){
     footer.insertAdjacentHTML('beforebegin', '<h3 class="rojo">¡¡¡BINGO!!! Ganó el jugador '+ganador.nombre+'</h3>');
 }
 
-// Con esta función capturo la posición de cada jugador dentro del DOM
-function setMagiaJugadores(){
-        magiajugador1 = document.getElementById("jugador1");
-        magiajugador2 = document.getElementById("jugador2");
-        magiajugador3 = document.getElementById("jugador3");
-        magiajugador4 = document.getElementById("jugador4");
-};
-
 // Defino los cartones como arrays y no como objetos para poder aprovechar las funciones nativas de arrays.
 // Los cartones podrían crearse en forma aleatoria y el usuario podría elegir la cantidad de jugadores en cada mesa. Esa mejora por ahora no es prioritaria.
 let carton1=[
@@ -179,20 +207,25 @@ let carton4=[
 
 // Función que agrega un sonido al terminal la partida. La agregué para probar las funciones nativas de JS para multimedia, pero seguramente quite esta función o en todo caso ponga un sonido opcional a nivel usuario al iniciar el juego.
 function sonido(){
-    const sonido=new Audio('../assets/sonido.mp3');
+    const sonido=new Audio('../assets/assetsBingo/sonido.mp3');
     sonido.play();
+    sonido.volume=0.1;
+};
+
+// Esta función es solo para reiniciar la página luego de cada juego y así minimizar el riesgo de error al manipular el DOM con JS
+function preInicioJuego(){
+    if(juego=="on"){
+        juego="off"
+        location.reload();
+    } else {
+        juego="on";
+        inicioJuego();
+    };
 };
 
 // Localizo al botón jugar del DOM y escucho evento "click" para correr función "preInicioJuego" que reinicia la página o inicia juego según corresponda.
 const jugar = document.getElementById("btJugar");
 jugar.addEventListener("click", preInicioJuego);
-
-//Localizo distintos elementos del DOM para poder interactuar con los mismos.
-const magiaBolillero = document.getElementById("bolillasAdentro");
-const magiaCarton1 = document.getElementById("carton1");
-const magiaCarton2 = document.getElementById("carton2");
-const magiaCarton3 = document.getElementById("carton3");
-const magiaCarton4 = document.getElementById("carton4");
 
 // Reseteo el bolillero agregando todas las bolillas al mismo. A medida que salen los números, el bolillero se va vaciando.
 function resetBolillero(){
@@ -204,29 +237,28 @@ function inicioJuego(){
     resetBolillero();
 
     if (jugador1.nombre=="vos, el burro"){
-        imageJ1.src= '../assets/1burro.jpeg';
-    } else {imageJ1.src="../assets/1chancho.jpeg"};
+        imageJ1.src= '../assets/assetsBingo/1burro.jpeg';
+    } else {imageJ1.src="../assets/assetsBingo/1chancho.jpeg"};
     if (jugador2.nombre=="C-3PO"){
-        imageJ2.src= '../assets/C-3PO.jpeg';
-    } else {imageJ2.src= '../assets/1ganso.png'};
+        imageJ2.src= '../assets/assetsBingo/C-3PO.jpeg';
+    } else {imageJ2.src= '../assets/assetsBingo/1ganso.png'};
     if (jugador3.nombre=="BB-8"){
-        imageJ3.src= '../assets/BB-8.jpeg';
-    } else {imageJ3.src= '../assets/1perro.png'};
+        imageJ3.src= '../assets/assetsBingo/BB-8.jpeg';
+    } else {imageJ3.src= '../assets/assetsBingo/1perro.png'};
     if (jugador4.nombre=="R2-D2"){
-        imageJ4.src= '../assets/R2-D2.jpeg';
-    } else {imageJ4.src= '../assets/1burro.jpeg'};
+        imageJ4.src= '../assets/assetsBingo/R2-D2.jpeg';
+    } else {imageJ4.src= '../assets/assetsBingo/1burro.jpeg'};
 
     document.querySelector('.carton1').appendChild(imageJ1);
     document.querySelector('.carton2').appendChild(imageJ2);
     document.querySelector('.carton3').appendChild(imageJ3);
     document.querySelector('.carton4').appendChild(imageJ4);
 
-    alert ("Jugadores en la mesa. Presiona Enter para iniciar juego");
+    hablar(`Bienvenidos ${jugador1.nombre}, ${jugador2.nombre}, ${jugador3.nombre} y ${jugador4.nombre}. Empieza el juego!`);
     tirarBolillas();
 };
 
 function tirarBolillas(){
-    setMagiaJugadores();
     let carton1Concat = c1Linea1.concat(c1Linea2, c1Linea3);
     let carton2Concat = c2Linea1.concat(c2Linea2, c2Linea3);
     let carton3Concat = c3Linea1.concat(c3Linea2, c3Linea3);
@@ -335,44 +367,44 @@ function tirarBolillas(){
 
         if(c1Linea1.length==0 || c1Linea2.length==0 || c1Linea3.length==0){
             if(ganadorLinea==0){
-                alert("Tenemos línea en el cartón 1!");
+                hablar("Tenemos línea en el cartón 1!");
                 setGanadorLinea(jugador1);
             }
         }
         if(c2Linea1.length==0 || c2Linea2.length==0 || c2Linea3.length==0){
             if(ganadorLinea==0){
-                alert("Tenemos línea en el cartón 2!");
+                hablar("Tenemos línea en el cartón 2!");
                 setGanadorLinea(jugador2);
             }
         }
         if(c3Linea1.length==0 || c3Linea2.length==0 || c3Linea3.length==0){
             if(ganadorLinea==0){
-                alert("Tenemos línea en el cartón 3!");
+                hablar("Tenemos línea en el cartón 3!");
                 setGanadorLinea(jugador3);
             }
         }
         if(c4Linea1.length==0 || c4Linea2.length==0 || c4Linea3.length==0){
             if(ganadorLinea==0){
-                alert("Tenemos línea en el cartón 4!");
+                hablar("Tenemos línea en el cartón 4!");
                 setGanadorLinea(jugador4);
             }
         }
 
         if(carton1Concat.length==0){
-        alert("Tenemos un ganador con el cartón 1!");
+        hablar(`¡Bingo! ¡Ganó ${jugador1.nombre} con el cartón 1!`);
         setGanadorBingo(jugador1);
         };
 
         if(carton2Concat.length==0){
-            alert("Tenemos un ganador con el cartón 2!");
+            hablar(`¡Bingo! ¡Ganó ${jugador2.nombre} con el cartón 2!`);
             setGanadorBingo(jugador2);
         }
         if(carton3Concat.length==0){
-            alert("Tenemos un ganador con el cartón 3!");
+            hablar(`¡Bingo! ¡Ganó ${jugador3.nombre} con el cartón 3!`);
             setGanadorBingo(jugador3);
         };
         if(carton4Concat.length==0){
-            alert("Tenemos un ganador con el cartón 4!");
+            hablar(`¡Bingo! ¡Ganó ${jugador4.nombre} con el cartón 4!`);
             setGanadorBingo(jugador4);
 
         };

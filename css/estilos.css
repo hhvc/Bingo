@@ -31,7 +31,8 @@ h4{
     grid-area: bolillero1;
     display: grid;
     grid-template-areas: 
-    "bolillasAdentro bolillasAfuera";
+    "bolillasAdentro"
+    "bolillasAfuera";
 }
 .bolillasAdentro{
     grid-area: bolillasAdentro;
@@ -62,6 +63,11 @@ grid-template-areas:
         "carton3 carton4"/
         50% 50%;
     }
+    .bolillero1{
+        grid-template-areas: 
+        "bolillasAdentro"
+        "bolillasAfuera";
+    }
     .footer{
         grid-template:
         "footer1" "footer2"/
@@ -76,6 +82,10 @@ grid-template-areas:
         "carton1 carton2 carton3 carton4"/
         25% 25% 25% 25%;
     }
+    .bolillero1{
+        grid-template-areas: 
+        "bolillasAdentro bolillasAfuera";
+    }
 }
 .imgCarton1{
     grid-area: imgCarton1;
@@ -83,7 +93,7 @@ grid-template-areas:
     background-size: 100%;
     background-position: center;
     height: 10rem;
-    background-image: url('../assets/Carton1.png');
+    background-image: url('../assets/assetsBingo/Carton1.png');
 }
 .imgCarton2{
     grid-area: imgCarton2;
@@ -91,7 +101,7 @@ grid-template-areas:
     background-size: 100%;
     background-position: center;
     height: 10rem;
-    background-image: url('../assets/Carton2.png');
+    background-image: url('../assets/assetsBingo/Carton2.png');
 }
 .imgCarton3{
     grid-area: imgCarton3;
@@ -99,7 +109,7 @@ grid-template-areas:
     background-size: 100%;
     background-position: center;
     height: 10rem;
-    background-image: url('../assets/Carton3.png');
+    background-image: url('../assets/assetsBingo/Carton3.png');
 }
 .imgCarton4{
     grid-area: imgCarton4;
@@ -107,7 +117,7 @@ grid-template-areas:
     background-size: 100%;
     background-position: center;
     height: 10rem;
-    background-image: url('../assets/Carton4.png');
+    background-image: url('../assets/assetsBingo/Carton4.png');
 }
 .carton1{
     grid-area: carton1;
