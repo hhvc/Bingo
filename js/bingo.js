@@ -265,9 +265,14 @@ function tirarBolillas(){
     let carton4Concat = c4Linea1.concat(c4Linea2, c4Linea3);
     const magiabolillasAdentro = document.getElementById("bolillasAdentro");
     const magiabolillasAfuera = document.getElementById("bolillasAfuera");
-    magiabolillasAdentro.insertAdjacentHTML('beforeend','<p id="bolillero2">'+bolillero+'</p>');
+    magiabolillasAdentro.insertAdjacentHTML('beforeend','<p id="bolillero2">'+bolillero+' </p>');
 
-    while (bolillero.length!=0 && carton1Concat.length!=0 && carton2Concat.length!=0 && carton3Concat.length!=0 && carton4Concat.length!=0){
+    if(bolillero.length!=0 && carton1Concat.length!=0 && carton2Concat.length!=0 && carton3Concat.length!=0 && carton4Concat.length!=0){
+        const intervaloJuego = setInterval(jugando, 300);
+        function frenarIntervalo(){clearInterval(intervaloJuego)};
+    }
+
+    function jugando(){
         let aleatorio = Math.round(Math.random()*90);
 
         let pruebaBolillero = bolillero.indexOf(aleatorio);
@@ -393,23 +398,27 @@ function tirarBolillas(){
         if(carton1Concat.length==0){
         hablar(`¡Bingo! ¡Ganó ${jugador1.nombre} con el cartón 1!`);
         setGanadorBingo(jugador1);
+        frenarIntervalo();
         };
 
         if(carton2Concat.length==0){
             hablar(`¡Bingo! ¡Ganó ${jugador2.nombre} con el cartón 2!`);
             setGanadorBingo(jugador2);
+            frenarIntervalo();
         }
         if(carton3Concat.length==0){
             hablar(`¡Bingo! ¡Ganó ${jugador3.nombre} con el cartón 3!`);
             setGanadorBingo(jugador3);
+            frenarIntervalo();
         };
         if(carton4Concat.length==0){
             hablar(`¡Bingo! ¡Ganó ${jugador4.nombre} con el cartón 4!`);
             setGanadorBingo(jugador4);
-
+            frenarIntervalo();
         };
-    };
+    }
 };
+
 
 
 
