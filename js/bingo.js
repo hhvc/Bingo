@@ -19,8 +19,9 @@ const imageJ4 = document.createElement('img');
 
 // Defino a los jugadores como objetos para hacer el código más simple y funcional.
 // Agrego parámetros de más porque me servirán para otros juegos. 
+let jugadores=[];
 let jugador1={
-    nombre:"vos, el burro",
+    nombre:"",
     sexo: undefined,
     edad: undefined,
     fuerza: undefined,
@@ -31,7 +32,7 @@ let jugador1={
 };
 
 let jugador2={
-    nombre:"C-3PO",
+    nombre:"",
     sexo: undefined,
     edad: undefined,
     fuerza: undefined,
@@ -42,7 +43,7 @@ let jugador2={
 };
     
 let jugador3={
-    nombre:"BB-8",
+    nombre:"",
     sexo: undefined,
     edad: undefined,
     fuerza: undefined,
@@ -53,7 +54,7 @@ let jugador3={
 };
 
 let jugador4={
-    nombre:"R2-D2",
+    nombre:"",
     sexo: undefined,
     edad: undefined,
     fuerza: undefined,
@@ -70,20 +71,29 @@ function guardar_localstorage(jugador, nombre){
     localStorage.setItem(jugador, nombre);
 }
 //función para recuperar nombres de usuario desde el localstorage
+//Uso operador lógico OR para acceder al nombre del jugador o asignar nombre por defecto.
 function recuperar_localsotorage(){
-    if(localStorage.getItem("jugador1")){
-        jugador1.nombre=localStorage.getItem("jugador1");
-    }
-    if(localStorage.getItem("jugador2")){
-        jugador2.nombre=localStorage.getItem("jugador2");
-    }
-    if(localStorage.getItem("jugador3")){
-        jugador3.nombre=localStorage.getItem("jugador3");
-    }
-    if(localStorage.getItem("jugador4")){
-        jugador4.nombre=localStorage.getItem("jugador4");
-    }
+    jugador1.nombre=localStorage.getItem("jugador1") || "vos, el burro";
+    mostrarConsola(jugador1)
+    jugador2.nombre=localStorage.getItem("jugador2") || "C-3PO";
+    mostrarConsola(jugador2)
+    jugador3.nombre=localStorage.getItem("jugador3") || "BB-8";
+    mostrarConsola(jugador3)
+    jugador4.nombre=localStorage.getItem("jugador4") || "R2-D2";
+    mostrarConsola(jugador4)
 }
+
+// Con esta función muestro en consola los nombres de los jugadores:
+// desestructuro la propiedad nombre
+function mostrarConsola(parametro){
+    const {nombre}=parametro;
+    //incremento el arreglo jugadores y luego envío los nombres a la consola
+    jugadores.push(nombre);
+    console.log("Los jugadores en mesa son: ")
+    // envío el spread del array jugadores a la consola.
+    console.log(...jugadores);
+}
+
 // capturo la ubicación del nombre de los jugadores en el DOM mediante el ID
 let magiajugador1 = document.getElementById("jugador1");
 let magiajugador2 = document.getElementById("jugador2");
@@ -116,7 +126,10 @@ function setNombre (nombreIngresado, nroJugador){
     hablar(saludo);
 
 // asigno nuevo nombre de jugaror
-    if (nombreIngresado!="" && nombreIngresado!="robot" && nombreIngresado!=" " && nombreIngresado!=null){
+// Uso operador lógico OR (|| = Falsy)
+    if (nombreIngresado||asignarjugador());
+
+    function asignarjugador(){
         switch(nroJugador){
             case 1: jugador1.nombre=nombreIngresado;
             magiajugador1.innerHTML=jugador1.nombre;
@@ -129,7 +142,7 @@ function setNombre (nombreIngresado, nroJugador){
             break;
             case 4: jugador4.nombre=nombreIngresado;
             magiajugador4.innerHTML=jugador4.nombre;
-        }
+        };
     };
 };
 
@@ -236,18 +249,14 @@ function inicioJuego(){
     sonido();
     resetBolillero();
 
-    if (jugador1.nombre=="vos, el burro"){
-        imageJ1.src= '../assets/assetsBingo/1burro.jpeg';
-    } else {imageJ1.src="../assets/assetsBingo/1chancho.jpeg"};
-    if (jugador2.nombre=="C-3PO"){
-        imageJ2.src= '../assets/assetsBingo/C-3PO.jpeg';
-    } else {imageJ2.src= '../assets/assetsBingo/1ganso.png'};
-    if (jugador3.nombre=="BB-8"){
-        imageJ3.src= '../assets/assetsBingo/BB-8.jpeg';
-    } else {imageJ3.src= '../assets/assetsBingo/1perro.png'};
-    if (jugador4.nombre=="R2-D2"){
-        imageJ4.src= '../assets/assetsBingo/R2-D2.jpeg';
-    } else {imageJ4.src= '../assets/assetsBingo/1burro.jpeg'};
+    //Uso operadores ternarios
+    jugador1.nombre=="vos, el burro" ? imageJ1.src= '../assets/assetsBingo/1burro.jpeg' : imageJ1.src="../assets/assetsBingo/1chancho.jpeg";
+
+    jugador2.nombre=="C-3PO" ? imageJ2.src= '../assets/assetsBingo/C-3PO.jpeg' : imageJ2.src= '../assets/assetsBingo/1ganso.png';
+    
+    jugador3.nombre=="BB-8" ? imageJ3.src= '../assets/assetsBingo/BB-8.jpeg' : imageJ3.src= '../assets/assetsBingo/1perro.png';
+
+    jugador4.nombre=="R2-D2" ? imageJ4.src= '../assets/assetsBingo/R2-D2.jpeg' : imageJ4.src= '../assets/assetsBingo/1burro.jpeg';
 
     document.querySelector('.carton1').appendChild(imageJ1);
     document.querySelector('.carton2').appendChild(imageJ2);
