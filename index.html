@@ -20,6 +20,15 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="css/estilos.css">
     <title>CoderBingo</title>
+    <!-- Inserto estilos de librería OWLCAROUSEL -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <!-- Llamo a función de inicialización del carrusel cuya librería importé -->
+    <script>
+        $(document).ready(function(){
+        $(".owl-carousel").owlCarousel();
+        });
+    </script>
 </head>
 <body>
     <header class="encabezado">
@@ -64,6 +73,29 @@
     <div class="titulo">
         <input onclick="this.value='RESET'" id="btJugar" class="titulo" type="button" value="JUGAR">
     </div>
+<br><br><br>
+<!-- inserto carousel de la librería importada -->
+<h2 class="titulo"> PROXIMAMENTE - OTROS JUEGOS</h2>
+<br><br>
+    <div class="owl-container">
+        <div class="owl-carousel owl-theme"> 
+            <div class="item">
+                <img src="assets/assetsCarrera/imagen1.gif" alt="Owl Image">
+            </div>
+            <div class="item">
+                <img src="assets/assetsCarreraAutos/pista.png" alt="Owl Image">
+            </div>
+            <div class="item">
+                <img src="assets/assetsClima/animated/cloudy.svg" alt="Owl Image">
+            </div>
+            <div class="item">
+                <img src="assets/assetsCarrera/ciclista_transparente.gif" alt="Owl Image">
+            </div>
+            <div class="item">
+                <img src="assets/assetsCarrera/corredor3.gif" alt="Owl Image">
+            </div>
+        </div>
+    </div>
 
     <footer class="encabezado footer" id="footer">
         <div class="footer1">
@@ -79,8 +111,13 @@
             <h4>Cartón:</h4>
             <p> Es el premio principal. Consiste en acertar antes que el resto todos los números del cartón.</p>
         </div>
-        
+
     </footer>
+
+<!-- script de librería jquery que es requerido por librería owlcarousel -->
+<script src="js/jquery-3.6.0.min.js"></script>
+<!-- scripts de librería OWLCAROUSEL -->
+<script src="js/owl.carousel.min.js"></script>
 
 <script src="js/bingo.js"></script>
 </body>
