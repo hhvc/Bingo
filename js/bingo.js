@@ -16,12 +16,10 @@ $('.owl-carousel').owlCarousel({
     }
 })
 
-
-
 // ***************************************************************
 // ************************ JUEGO DE BINGO ***********************
 // *********** Trabajo práctico curso JS en Coderhouse ***********
-// ************ Alumno, Héctor Horacio Vázquez Cuestas ***********
+// ************ Alumno, Héctor Horacio Vazquez Cuestas ***********
 // ***************************************************************
 
 //El bolillero tiene números corridos del 1 al 90. Lo defino como array para poder vaciarlo a medida que salen los números.
@@ -84,35 +82,77 @@ let jugador4={
     avatar:imageJ4,
 };
 
-recuperar_localsotorage();
+function asignarjugador(nroJugador, nombreIngresado, avatar){
+    switch(nroJugador){
+        case 1: jugador1.nombre=nombreIngresado;
+        magiajugador1.innerHTML=jugador1.nombre;
+        if (avatar!=0){imageJ1.src=avatar}
+        break;
+        case 2: jugador2.nombre=nombreIngresado;
+        magiajugador2.innerHTML=jugador2.nombre;
+        if (avatar!=0){imageJ2.src=avatar}
+        break;
+        case 3: jugador3.nombre=nombreIngresado;
+        magiajugador3.innerHTML=jugador3.nombre;
+        if (avatar!=0){imageJ3.src=avatar}
+        break;
+        case 4: jugador4.nombre=nombreIngresado;
+        magiajugador4.innerHTML=jugador4.nombre;
+        if (avatar!=0){imageJ4.src=avatar}
+    };
+    actualizarNombresEnDom()   
+};
+
+// uso fetch con la API "pokeapi" para agregar avatares y nombres por defecto
+function getPokemon(jdor, nroPokemon){
+    fetch(`https://pokeapi.co/api/v2/pokemon/${nroPokemon}`)
+    .then(function (response){
+        response.json()
+        .then(function(pokemon){
+            let pokemonName = pokemon.name
+            let pokemonSprite = pokemon.sprites.front_default
+            asignarjugador(jdor, pokemonName, pokemonSprite)
+        })
+    })
+}
+
+// En la variable ran guarto números random con los que asigno los pokemons
+let ran
+
+function random(){
+    ran=Math.round(Math.random()*150)
+    console.log("el nvo random es "+ran)
+}
+
+function asignarPokemon(jdor){
+    random()
+    getPokemon(jdor,ran)
+}
 
 //función para guardar nombre de jugadores en el localstorage
 function guardar_localstorage(jugador, nombre){
     localStorage.setItem(jugador, nombre);
-}
-//función para recuperar nombres de usuario desde el localstorage
-//Uso operador lógico OR para acceder al nombre del jugador o asignar nombre por defecto.
-function recuperar_localsotorage(){
-    jugador1.nombre=localStorage.getItem("jugador1") || "vos, el burro";
-    mostrarConsola(jugador1)
-    jugador2.nombre=localStorage.getItem("jugador2") || "C-3PO";
-    mostrarConsola(jugador2)
-    jugador3.nombre=localStorage.getItem("jugador3") || "BB-8";
-    mostrarConsola(jugador3)
-    jugador4.nombre=localStorage.getItem("jugador4") || "R2-D2";
-    mostrarConsola(jugador4)
+    recuperar_localsotorage();
+    actualizarNombresEnDom()    
 }
 
-// Con esta función muestro en consola los nombres de los jugadores:
-// desestructuro la propiedad nombre
-function mostrarConsola(parametro){
-    const {nombre}=parametro;
-    //incremento el arreglo jugadores y luego envío los nombres a la consola
-    jugadores.push(nombre);
-    console.log("Los jugadores en mesa son: ")
-    // envío el spread del array jugadores a la consola.
-    console.log(...jugadores);
+// función para recuperar nombres de usuario desde el localstorage
+// Uso operador lógico OR para acceder al nombre del jugador o asignar nombre por defecto.
+function recuperar_localsotorage(){
+    if(localStorage.getItem("jugador1")!=undefined){
+        jugador1.nombre=localStorage.getItem("jugador1")
+    } else {asignarPokemon(1)}
+    if(localStorage.getItem("jugador2")!=undefined){
+        jugador1.nombre=localStorage.getItem("jugador1")
+    } else {asignarPokemon(2)}
+    if(localStorage.getItem("jugador3")!=undefined){
+        jugador1.nombre=localStorage.getItem("jugador1")
+    } else {asignarPokemon(3)}
+    if(localStorage.getItem("jugador4")!=undefined){
+        jugador1.nombre=localStorage.getItem("jugador1")
+    } else {asignarPokemon(4)}
 }
+recuperar_localsotorage();
 
 // capturo la ubicación del nombre de los jugadores en el DOM mediante el ID
 let magiajugador1 = document.getElementById("jugador1");
@@ -121,10 +161,14 @@ let magiajugador3 = document.getElementById("jugador3");
 let magiajugador4 = document.getElementById("jugador4");
 
 // actualizo nombre de jugadores en la mesa
-magiajugador1.innerHTML=jugador1.nombre;
-magiajugador2.innerHTML=jugador2.nombre;
-magiajugador3.innerHTML=jugador3.nombre;
-magiajugador4.innerHTML=jugador4.nombre;
+function actualizarNombresEnDom(){
+    magiajugador1.innerHTML=jugador1.nombre;
+    magiajugador2.innerHTML=jugador2.nombre;
+    magiajugador3.innerHTML=jugador3.nombre;
+    magiajugador4.innerHTML=jugador4.nombre;
+}
+
+actualizarNombresEnDom()
 
 //A las variables que defino con nombre *magia* las uso para interactuar con el DOM 
 //Localizo distintos elementos del DOM para poder interactuar con los mismos.
@@ -138,36 +182,16 @@ const magiaCarton4 = document.getElementById("carton4");
 const hablar =(texto)=>speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
 
 // Esta función asigna los nombres de jugadores a las variables correspondientes y en el localstorage.
-//Dentro del index.html agrego la funcionalidad onclick a los botones de agregar jugador para que activen la función setNombre enviándole como parámetro el nombre ingresado y el número de jugador.
-function setNombre (nombreIngresado, nroJugador){
+function setNombre (nombreIngresado, nroJugador, avatar){
     guardar_localstorage("jugador"+nroJugador, nombreIngresado);
 // Agrego saludo fonético
     let saludo= "hola "+nombreIngresado+", bienvenido al juego";
     hablar(saludo);
-
-// asigno nuevo nombre de jugaror
 // Uso operador lógico OR (|| = Falsy)
-    if (nombreIngresado||asignarjugador());
-
-    function asignarjugador(){
-        switch(nroJugador){
-            case 1: jugador1.nombre=nombreIngresado;
-            magiajugador1.innerHTML=jugador1.nombre;
-            break;
-            case 2: jugador2.nombre=nombreIngresado;
-            magiajugador2.innerHTML=jugador2.nombre;
-            break;
-            case 3: jugador3.nombre=nombreIngresado;
-            magiajugador3.innerHTML=jugador3.nombre;
-            break;
-            case 4: jugador4.nombre=nombreIngresado;
-            magiajugador4.innerHTML=jugador4.nombre;
-        };
-    };
+    if (nombreIngresado||asignarjugador(nroJugador, nombreIngresado, avatar));
 };
 
 // Las siguientes funciones reciben como dato cuá es el jugador que ha ganado y envían al DOM la información en la ubicación correspondiente a cada ganador.
-// Debería poder mejorarlas minimizando las repeticiones de líneas similares, pero las prioridades actuales son que todo funcione e ir mejorando la funcionalidad a nivel usuario.
 function setGanadorLinea(ganador){
     ganadorLinea=ganador;
     switch(ganador){
@@ -268,15 +292,6 @@ function resetBolillero(){
 function inicioJuego(){
     sonido();
     resetBolillero();
-
-    //Uso operadores ternarios
-    jugador1.nombre=="vos, el burro" ? imageJ1.src= '../assets/assetsBingo/1burro.jpeg' : imageJ1.src="../assets/assetsBingo/1chancho.jpeg";
-
-    jugador2.nombre=="C-3PO" ? imageJ2.src= '../assets/assetsBingo/C-3PO.jpeg' : imageJ2.src= '../assets/assetsBingo/1ganso.png';
-    
-    jugador3.nombre=="BB-8" ? imageJ3.src= '../assets/assetsBingo/BB-8.jpeg' : imageJ3.src= '../assets/assetsBingo/1perro.png';
-
-    jugador4.nombre=="R2-D2" ? imageJ4.src= '../assets/assetsBingo/R2-D2.jpeg' : imageJ4.src= '../assets/assetsBingo/1burro.jpeg';
 
     document.querySelector('.carton1').appendChild(imageJ1);
     document.querySelector('.carton2').appendChild(imageJ2);
